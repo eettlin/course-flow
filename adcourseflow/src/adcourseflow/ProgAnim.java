@@ -2,6 +2,7 @@ package adcourseflow;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import jgame.ButtonState;
 import jgame.Context;
@@ -19,8 +20,12 @@ public class ProgAnim extends GContainer {
 	
 	
 	public ProgAnim() {
-		setSize(1100, 850);
+		setSize(1000, 800);
 		setBackgroundColor(Color.black);
+		
+		BufferedImage bgi = ImageCache.getImage("buttons/bg2.png");
+		GSprite bgs = new GSprite(bgi);
+		setBackgroundSprite(bgs);
 
 		GButton mbProgramming = createButton(1, "Programming");
 		mbProgramming.setLocation(0, 100);
@@ -38,8 +43,8 @@ public class ProgAnim extends GContainer {
 	
 	private GButton createButton(final int buttonIndex, String buttonText) {
 
-		MovementTween mt = new MovementTween(36, Interpolation.EASE_IN, 400, 0);
-		MovementTween mtb = new MovementTween(20, Interpolation.EASE_OUT, -80, 0);
+		MovementTween mt = new MovementTween(36, Interpolation.EASE_IN, 100, 0);
+		MovementTween mtb = new MovementTween(20, Interpolation.EASE_OUT, -150, 0);
 		
 		mt.chain(mtb);
 		
@@ -54,19 +59,14 @@ public class ProgAnim extends GContainer {
 		
 		Image image3 = ImageCache.getImage("buttons/orangePressed.png");
 		GSprite pressedgs = new GSprite(image3);
-		
-		//GSprite bgs = new GSprite("buttons/buttonup.png");
-		//btn.setStateSprite(ButtonState.NONE,createButtonSprite("buttons/buttonup.png"));
+
 		btn.setStateSprite(ButtonState.NONE,nonegs);
 		btn.setStateSprite(ButtonState.HOVERED,hovergs);
 		btn.setStateSprite(ButtonState.PRESSED,pressedgs);
 		btn.setSize(250, 50);
 		
 		GMessage gm = new GMessage(buttonText);
-
 		gm.setSize(btn.getWidth(), btn.getHeight());
-		//gm.setAlignmentX(0.5);
-		//gm.setAlignmentY(0.5);
 		gm.setFontSize(24);
 		gm.setColor(Color.BLACK);
 		btn.addAt(gm, 150, 50);
@@ -75,7 +75,7 @@ public class ProgAnim extends GContainer {
 
 			@Override
 			public void invoke(GObject target, Context context) {
-				addAt(btn, -100, (buttonIndex-1)*100  + 220);
+				addAt(btn, -(buttonIndex-1)*260+980 ,  600 );
 			}
 		};
 		addListener(dl);
