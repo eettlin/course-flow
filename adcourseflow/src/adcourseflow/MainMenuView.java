@@ -22,7 +22,7 @@ public class MainMenuView extends GContainer {
 
 		setSize(1100, 850);
 		setBackgroundColor(Color.BLACK);
-
+		
 		GButton mbProgramming = createButton(1, "Programming");
 		mbProgramming.setLocation(0, 100);
 		
